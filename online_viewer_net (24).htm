@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Biz Equip - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { height:100%; }
+  body {
+    font-family:'Montserrat',sans-serif;
+    display:flex;
+    height:100vh;
+    background:#f9f9f9;
+    color:#001f3f;
+    overflow:hidden;
+  }
+
+  /* Sidebar */
+  .sidebar { width:240px; background:#001f3f; color:#FFD700; display:flex; flex-direction:column; padding:2rem 1rem; }
+  .sidebar h2 { font-size:1.5rem; margin-bottom:1.25rem; }
+  .sidebar a { color:#FFD700; text-decoration:none; margin-bottom:0.7rem; display:flex; align-items:center; padding:0.55rem; border-radius:6px; transition:0.2s; }
+  .sidebar a:hover { background:#003366; }
+  .sidebar a i { margin-right:0.6rem; }
+  .sidebar button { margin-top:auto; background:#FFD700; color:#001f3f; border:none; padding:0.55rem; font-weight:700; border-radius:6px; cursor:pointer; transition:0.2s; }
+  .sidebar button:hover { background:#FFC300; }
+
+  /* Main Content */
+  .main { flex:1; padding:20px; overflow-y:auto; } /* scrollbar enabled */
+  .top-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+  .profile-left { display:flex; gap:12px; align-items:center; }
+  .avatar { width:58px; height:58px; border-radius:8px; background:linear-gradient(135deg,#7C3AED,#06B6D4); color:white; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px; }
+  .user-info { line-height:1; }
+  .user-info .name { font-weight:700; font-size:18px; }
+  .user-info .industry { font-size:13px; color:rgba(0,31,63,0.7); margin-top:3px; }
+  .edit-btn { background:#ffd700; color:#001f3f; border:0; padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:700; }
+  .welcome { font-size:1.05rem; margin-bottom:8px; color:#001f3f; }
+
+  .grid { display:grid; grid-template-columns:1fr; gap:12px; }
+  @media(min-width:768px){ .grid { grid-template-columns:repeat(3,1fr); } }
+  .card { background:#fff; padding:14px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); text-align:left; transition:0.18s; }
+  .card:hover { transform:translateY(-6px); }
+  .card img { max-width:100%; height:42px; object-fit:contain; margin-bottom:8px; display:block; }
+  a.btn { display:inline-block; padding:7px 12px; background:#FFD700; color:#001f3f; font-weight:700; border-radius:6px; text-decoration:none; transition:0.18s; margin-top:8px; }
+  a.btn:hover { background:#FFC300; }
+  .section { display:none; }
+  .section.active { display:block; }
+
+  h3 { margin-bottom:10px; color:#001f3f; font-size:18px; }
+  .muted { color:rgba(0,31,63,0.7); font-size:13px; }
+
+  .mentee { display:flex; align-items:center; gap:12px; }
+  .mentor-info { font-weight:700; }
+  .meta { font-size:13px; color:rgba(0,31,63,0.6); }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media(max-width:720px){ .two-col { grid-template-columns:1fr; } }
+
+  /* small helper */
+  .small { font-size:13px; color:rgba(0,31,63,0.6); margin-top:6px; }
+
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>Biz Equip</h2>
+  <a href="#" data-section="register"><i>📝</i> Register Business</a>
+  <a href="#" data-section="financial"><i>💰</i> Financial Tools</a>
+  <a href="#" data-section="templates"><i>📄</i> Business Templates</a>
+  <a href="#" data-section="mentors"><i>👩‍🏫</i> Mentors</a>
+  <a href="#" data-section="courses"><i>🎓</i> Short Courses</a>
+  <a href="#" data-section="tenders"><i>📑</i> Tender Learning</a>
+  <a href="#" data-section="partnerships"><i>🤝</i> Partnerships</a>
+  <a href="#" data-section="suppliers"><i>🏭</i> Suppliers</a>
+  <a href="#" data-section="events"><i>📅</i> Upcoming Events</a>
+  <a href="#" data-section="videos"><i>🎥</i> Video Tutorials</a>
+  <a href="#" data-section="community"><i>🌐</i> Community</a>
+  <button id="logoutBtn">Logout</button>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+  <div class="top-row">
+    <div class="profile-left">
+      <div class="avatar" id="avatarInitials">N</div>
+      <div class="user-info">
+        <div class="name" id="displayName">Nkululeko</div>
+        <div class="industry" id="displayIndustry">Industry: TECH</div>
+      </div>
+    </div>
+    <div>
+      <button class="edit-btn" id="editProfileBtn">Edit Profile</button>
+    </div>
+  </div>
+
+  <div class="welcome" id="welcomeMsg">Welcome back — here's your dashboard overview.</div>
+
+  <!-- Register Business -->
+  <div class="section" id="register">
+    <h3>Register Your Business With Us</h3>
+    <p class="muted">Start official registration using these government and supplier portals:</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card">
+        <strong>CIDB</strong>
+        <div class="small">Construction Industry Development Board — register to access construction tenders.</div>
+        <a class="btn" href="https://www.cidb.org.za/" target="_blank">Go to CIDB</a>
+      </div>
+      <div class="card">
+        <strong>CSD</strong>
+        <div class="small">Central Supplier Database — register to be considered for government procurement.</div>
+        <a class="btn" href="https://secure.csd.gov.za/" target="_blank">Go to CSD</a>
+      </div>
+      <div class="card">
+        <strong>SARS</strong>
+        <div class="small">Tax registration and compliance resources.</div>
+        <a class="btn" href="https://www.sars.gov.za/" target="_blank">Go to SARS</a>
+      </div>
+      <div class="card">
+        <strong>CIPC</strong>
+        <div class="small">Company and Intellectual Property Commission — company registration and filings.</div>
+        <a class="btn" href="https://www.cipc.co.za/" target="_blank">Go to CIPC</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Tools -->
+  <div class="section" id="financial">
+    <h3>Financial Tools</h3>
+    <p class="muted">Tools to manage cash flow, pricing and funding.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card"><strong>Budget Planner</strong><div class="small">Create and export monthly budgets.</div></div>
+      <div class="card"><strong>Cashflow Calculator</strong><div class="small">Project inflows and outflows over 12 months.</div></div>
+      <div class="card"><strong>Grants Info</strong><div class="small">Local grant and support links.</div><a class="btn" href="https://www.seda.org.za/" target="_blank">View Grants</a></div>
+
+      <!-- three additional tools -->
+      <div class="card"><strong>Invoice Tracker</strong><div class="small">Track sent invoices and payment status.</div></div>
+      <div class="card"><strong>Profit Margin Calculator</strong><div class="small">Quick margin and breakeven calculations.</div></div>
+      <div class="card"><strong>Funding Planner</strong><div class="small">Plan funding rounds and map investor targets.</div></div>
+    </div>
+  </div>
+
+  <!-- Business Templates -->
+  <div class="section" id="templates">
+    <h3>Business Templates</h3>
+    <p class="muted">Downloadable templates to get you started quickly.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card"><strong>Invoice Template (Excel)</strong><div class="small">Simple invoice you can edit and send to clients.</div><a class="btn" href="data:text/plain;charset=utf-8,Invoice%20Template%0A%0ACompany%20Name:%20%0ADate:%20%0AInvoice%20No:%20%0A%0ADescription%20%7C%20Qty%20%7C%20Unit%20Price%20%7C%20Total%0A" download="invoice-template.txt">Download</a></div>
+
+      <div class="card"><strong>Quotation Template</strong><div class="small">Provide pricing & scope to prospective clients.</div></div>
+
+      <div class="card"><strong>Business Plan (Template)</strong><div class="small">Sections and prompts for a concise business plan.</div></div>
+
+      <div class="card"><strong>Tender Template</strong><div class="small">Use this for responding to RFPs and public tenders.</div>
+        <!-- simple downloadable tender template -->
+        <a class="btn" id="downloadTenderTemplate" href="data:text/plain;charset=utf-8,Tender%20Response%20Template%0A%0ATender%20Title%3A%20%0ACompany%20Name%3A%20%0AContact%3A%20%0A%0AScope%20of%20Work%3A%0A-%20%0A-%20%0A%0APricing%3A%20%0A%0ATechnical%20Approach%3A%0A%0A%0ASubmission%20Deadline%3A%20%0A%0A" download="tender-template.txt">Download Tender Template</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mentors -->
+  <div class="section" id="mentors">
+    <h3>Mentors</h3>
+    <p class="muted">Connect with experienced mentors across industries and towns.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card">
+        <div class="mentee">
+          <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#7C3AED,#06B6D4);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;">SM</div>
+          <div>
+            <div class="mentor-info">Sizwe Mthembu</div>
+            <div class="meta">Founder — MicroTech Labs • Durban</div>
+          </div>
+        </div>
+        <div class="small">Focus: Product, go-to-market</div>
+        <a class="btn" href="#">Request Intro</a>
+      </div>
+
+      <div class="card">
+        <div class="mentee">
+          <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#FF7A59,#7C3AED);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;">LN</div>
+          <div>
+            <div class="mentor-info">Lerato Nkosi</div>
+            <div class="meta">Digital Growth — Spark Growth Agency • Cape Town</div>
+          </div>
+        </div>
+        <div class="small">Focus: Digital marketing & customer acquisition</div>
+        <a class="btn" href="#">Request Intro</a>
+      </div>
+
+      <div class="card">
+        <div class="mentee">
+          <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#06B6D4,#FF7A59);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;">BD</div>
+          <div>
+            <div class="mentor-info">Bongani Dlamini</div>
+            <div class="meta">Finance Director — CapitalRise • Johannesburg</div>
+          </div>
+        </div>
+        <div class="small">Focus: Funding strategy & financial modelling</div>
+        <a class="btn" href="#">Request Intro</a>
+      </div>
+
+      <div class="card">
+        <div class="mentee">
+          <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#7C3AED,#FF7A59);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;">TM</div>
+          <div>
+            <div class="mentor-info">Thabo Mokoena</div>
+            <div class="meta">Operations & Scaling — ScaleWorks • Port Elizabeth</div>
+          </div>
+        </div>
+        <div class="small">Focus: Operations, scaling, supplier contracts</div>
+        <a class="btn" href="#">Request Intro</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Short Courses -->
+  <div class="section" id="courses">
+    <h3>Short Courses</h3>
+    <p class="muted">Select a program to learn practical entrepreneurship skills.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Nelson_Mandela_University_logo.svg" alt="NMU Logo">
+        <strong>Entrepreneurship & Small Business Management (NMU)</strong>
+        <div class="small">Modular course covering business planning, finance, and market entry.</div>
+        <a class="btn" href="https://business.mandela.ac.za/" target="_blank">View Course</a>
+      </div>
+
+      <div class="card">
+        <strong>Coursera: Entrepreneurship</strong>
+        <div class="small">Curated online modules to build a minimum viable product and launch.</div>
+        <a class="btn" href="https://www.coursera.org/browse/business/entrepreneurship" target="_blank">View</a>
+      </div>
+
+      <div class="card">
+        <strong>edX: Entrepreneurship</strong>
+        <div class="small">Practical lessons from universities around product-market fit.</div>
+        <a class="btn" href="https://www.edx.org/course/entrepreneurship" target="_blank">View</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tender Learning -->
+  <div class="section" id="tenders">
+    <h3>Tender Learning</h3>
+    <p class="muted">Courses and templates to win government and private tenders.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card">
+        <strong>Understanding Tender Documents</strong>
+        <div class="small">Learn how to read RFPs and bid specifications.</div>
+        <a class="btn" href="https://www.gov.za/tenders" target="_blank">Start Learning</a>
+      </div>
+      <div class="card">
+        <strong>Tender Compliance Training</strong>
+        <div class="small">Step-by-step compliance and documentation training.</div>
+        <a class="btn" href="https://www.etenders.gov.za/" target="_blank">Join Class</a>
+      </div>
+      <div class="card">
+        <strong>Online Tender Workshops</strong>
+        <div class="small">Live workshops and recorded sessions.</div>
+        <a class="btn" href="https://www.seda.org.za/" target="_blank">View Workshop</a>
+      </div>
+      <div class="card">
+        <strong>Tender Response Template</strong>
+        <div class="small">Download our recommended tender response structure.</div>
+        <a class="btn" id="downloadTenderTemplate2" href="data:text/plain;charset=utf-8,Tender%20Response%20Template%0A%0ATitle%3A%20%0ACompany%3A%20%0AContact%3A%20%0A%0AScope%3A%0A-%20%0A-%20%0A%0AProposed%20Price%3A%20%0A%0ACompliance%20Docs%3A%0A-%20%0A-%20%0A%0ASubmission%20Deadline%3A%20" download="tender-response-template.txt">Download Template</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partnerships -->
+  <div class="section" id="partnerships">
+    <h3>Partnerships & Suppliers (moved)</h3>
+    <p class="muted">Organisations we've partnered with or recommend.</p>
+    <div class="two-col" style="margin-top:10px;">
+      <div>
+        <div class="card"><strong>SEDA</strong><div class="small">Small Enterprise Development Agency — business support.</div></div>
+        <div class="card"><strong>DTI</strong><div class="small">Department of Trade, Industry and Competition — policy & support.</div></div>
+        <div class="card"><strong>Standard Bank Grants</strong><div class="small">Bank grant opportunities & business advice.</div></div>
+      </div>
+      <div>
+        <div class="card"><strong>Coca-Cola SA (partner)</strong><div class="small">Supplier & distribution programs.</div></div>
+        <div class="card"><strong>Coega Development Corp</strong><div class="small">Industrial partnerships & procurement.</div></div>
+        <div class="card"><strong>Spar SA</strong><div class="small">Retail supplier partnerships.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Suppliers (new section) -->
+  <div class="section" id="suppliers">
+    <h3>Suppliers</h3>
+    <p class="muted">Suppliers we recommend for materials, retail and office needs.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card"><strong>Buco</strong><div class="small">Hardware & building supplies — national branches.</div><a class="btn" href="https://www.buco.co.za/" target="_blank">Visit Buco</a></div>
+      <div class="card"><strong>Baking Supplier (Bakers Hub)</strong><div class="small">Ingredients & baking equipment for food entrepreneurs.</div></div>
+      <div class="card"><strong>Agrimart</strong><div class="small">Agricultural supplies & packaging.</div></div>
+      <div class="card"><strong>Office Depot</strong><div class="small">Office supplies & printing.</div></div>
+      <div class="card"><strong>Wholesale Fabrics</strong><div class="small">Textile supplier for fashion businesses.</div></div>
+      <div class="card"><strong>Local Print House</strong><div class="small">Branding & signage suppliers.</div></div>
+    </div>
+  </div>
+
+  <!-- Upcoming Events -->
+  <div class="section" id="events">
+    <h3>Upcoming Events</h3>
+    <p class="muted">Webinars, seminars and training sessions you can attend.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card">
+        <strong>Webinar: Digital Sales for SMEs</strong>
+        <div class="small">15 Nov 2025 • 14:00 • Online • Host: Spark Growth</div>
+        <a class="btn" href="#">Register</a>
+      </div>
+      <div class="card">
+        <strong>Entrepreneur Seminar: Scaling Smart</strong>
+        <div class="small">22 Nov 2025 • 09:00 • Johannesburg • Host: Biz Equip + CapitalRise</div>
+        <a class="btn" href="#">More Info</a>
+      </div>
+      <div class="card">
+        <strong>Tender Training Day</strong>
+        <div class="small">3 Dec 2025 • 10:00 • Cape Town • Host: SEDA</div>
+        <a class="btn" href="#">Book Spot</a>
+      </div>
+      <div class="card">
+        <strong>Bootcamp: Startup Finance</strong>
+        <div class="small">10 Dec 2025 • 09:00 • Durban • Host: NMU Business School</div>
+        <a class="btn" href="#">Apply</a>
+      </div>
+      <div class="card">
+        <strong>Local Expo: Small Biz Market</strong>
+        <div class="small">18 Dec 2025 • 10:00 • Port Elizabeth • Host: Local Chamber</div>
+        <a class="btn" href="#">Visit</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Tutorials -->
+  <div class="section" id="videos">
+    <h3>Video Tutorials</h3>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card"><iframe width="100%" height="150" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe></div>
+      <div class="card"><iframe width="100%" height="150" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" frameborder="0" allowfullscreen></iframe></div>
+    </div>
+  </div>
+
+  <!-- Community Engagement -->
+  <div class="section" id="community">
+    <h3>Community Engagement</h3>
+    <p class="muted">Examples of local meetups, expos and collaborative events.</p>
+    <div class="grid" style="margin-top:10px;">
+      <div class="card">
+        <strong>Small Biz Expo — Gauteng</strong>
+        <div class="small">12 Jan 2026 • 09:00–16:00 • Sandton Convention Centre • Local vendors showcase & B2B networking.</div>
+      </div>
+      <div class="card">
+        <strong>Entrepreneurs Meetup — Durban</strong>
+        <div class="small">28 Jan 2026 • 18:00–20:00 • Durban City Hall • Topic: Digital marketing & customer retention.</div>
+      </div>
+      <div class="card">
+        <strong>Sector Pop-up Market — Cape Town</strong>
+        <div class="small">5 Feb 2026 • 10:00–15:00 • V&A Waterfront • Food & retail entrepreneurs sharing stalls.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Default user data (keeps Nkululeko TECH unless user edits)
+  const defaultUser = { name: 'Nkululeko', industry: 'TECH' };
+  const stored = JSON.parse(localStorage.getItem('userData') || 'null');
+  const userData = stored || defaultUser;
+
+  // Set UI elements
+  const displayName = document.getElementById('displayName');
+  const displayIndustry = document.getElementById('displayIndustry');
+  const avatarInitials = document.getElementById('avatarInitials');
+  const welcomeMsg = document.getElementById('welcomeMsg');
+
+  function setUserUI(user){
+    displayName.textContent = user.name || defaultUser.name;
+    displayIndustry.textContent = `Industry: ${user.industry || defaultUser.industry}`;
+    avatarInitials.textContent = (user.name || defaultUser.name).split(' ').map(n=>n[0]).slice(0,2).join('').toUpperCase();
+    welcomeMsg.textContent = `Welcome back, ${user.name || defaultUser.name} — here's your dashboard overview.`;
+  }
+  setUserUI(userData);
+
+  // Edit profile functionality (keeps simple)
+  document.getElementById('editProfileBtn').addEventListener('click', () => {
+    const newName = prompt('Enter your full name:', userData.name || '');
+    if(newName === null) return;
+    const newIndustry = prompt('Enter your industry:', userData.industry || '');
+    if(newIndustry === null) return;
+    const newUser = { name: newName.trim() || defaultUser.name, industry: newIndustry.trim() || defaultUser.industry };
+    localStorage.setItem('userData', JSON.stringify(newUser));
+    setUserUI(newUser);
+    alert('Profile updated.');
+  });
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('userData');
+    window.location.href = 'index.html';
+  });
+
+  // Sidebar interactivity
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = document.querySelectorAll('.section');
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = link.dataset.section;
+      sections.forEach(sec => {
+        if(sec.id === target) sec.classList.add('active');
+        else sec.classList.remove('active');
+      });
+      // scroll to top of main for visibility
+      document.querySelector('.main').scrollTop = 0;
+    });
+  });
+
+  // Show Register section by default
+  if(sections.length) {
+    sections.forEach(s => s.classList.remove('active'));
+    const defaultSection = document.getElementById('register') || sections[0];
+    if(defaultSection) defaultSection.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
