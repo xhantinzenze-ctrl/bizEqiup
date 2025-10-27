@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biz Equip</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family:'Montserrat',sans-serif; background:#f9f9f9; color:#001f3f; }
+  
+  header { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:#001f3f; color:#FFD700; }
+  header h1 { font-size:2rem; font-weight:900; }
+  nav a { margin-left:1rem; color:#FFD700; text-decoration:none; font-weight:600; }
+  nav a:hover { color:#fff; }
+
+  .hero { text-align:center; padding:5rem 2rem; background: linear-gradient(to bottom, #001f3f, #003366); color:#FFD700; }
+  .hero h2 { font-size:3rem; margin-bottom:1rem; }
+  .hero p { max-width:700px; margin:0 auto 2rem auto; color:#f0f0f0; }
+  .btn { display:inline-block; padding:0.8rem 2rem; background:#FFD700; color:#001f3f; font-weight:700; border-radius:50px; text-decoration:none; transition:0.3s; }
+  .btn:hover { background:#FFC300; }
+
+  section { padding:4rem 2rem; text-align:center; }
+  .text-gold { color:#FFD700; }
+  .section-content { max-width:900px; margin:0 auto; color:#001f3f; }
+
+  /* Community & Brands Grid */
+  .grid { display:grid; grid-template-columns:1fr; gap:1.5rem; margin-top:2rem; }
+  @media(min-width:768px){ .grid { grid-template-columns:repeat(3,1fr); } }
+  .card { background:#fff; padding:1rem; border-radius:10px; box-shadow:0 4px 6px rgba(0,0,0,0.2); }
+  .card img { max-width:100%; height:50px; object-fit:contain; margin-bottom:0.5rem; }
+  
+  footer { background:#001f3f; color:#FFD700; text-align:center; padding:3rem 2rem; }
+  footer p { margin:0.5rem 0; }
+  footer a { color:#FFD700; text-decoration:none; margin:0 0.5rem; }
+  footer a:hover { color:#fff; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <h1>Biz Equip</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#community">Community</a>
+    <a href="#brands">Brands</a>
+    <a href="#contact">Contact</a>
+    <a href="signup.html">Sign Up</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h2>Empowering Entrepreneurs to Grow and Succeed</h2>
+  <p>Biz Equip provides mentorship, financial tools, courses, and community engagement to help entrepreneurs start, manage, and scale their businesses.</p>
+  <a href="signup.html" class="btn">Get Started</a>
+</section>
+
+<!-- About -->
+<section id="about">
+  <h3 class="text-gold" style="font-size:2.5rem;">About Biz Equip</h3>
+  <p class="section-content">
+    Biz Equip is dedicated to supporting entrepreneurs across South Africa. From mentorship and financial guidance to business templates and community initiatives, we provide the tools and networks needed to succeed. Join a community that grows together.
+  </p>
+  <a href="signup.html" class="btn">Join Now</a>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <h3 class="text-gold" style="font-size:2.5rem;">Our Services</h3>
+  <p class="section-content">
+    Biz Equip offers tailored services including business planning, mentorship, financial tools, templates, workshops, and access to suppliers and partnerships to help you grow efficiently.
+  </p>
+  <div class="grid">
+    <div class="card">Business Planning</div>
+    <div class="card">Mentorship</div>
+    <div class="card">Financial Tools</div>
+    <div class="card">Templates & Contracts</div>
+    <div class="card">Workshops & Courses</div>
+    <div class="card">Suppliers & Partnerships</div>
+  </div>
+</section>
+
+<!-- Community Engagement -->
+<section id="community">
+  <h3 class="text-gold" style="font-size:2.5rem;">Community Engagement</h3>
+  <p class="section-content">
+    Connect with other entrepreneurs, join events, share ideas, and participate in networking workshops and forums. Build a strong entrepreneurial community with Biz Equip.
+  </p>
+  <div class="grid">
+    <div class="card">Networking Events</div>
+    <div class="card">Discussion Forums</div>
+    <div class="card">Workshops & Seminars</div>
+  </div>
+</section>
+
+<!-- Brands / Partners -->
+<section id="brands">
+  <h3 class="text-gold" style="font-size:2.5rem;">Our Partners & Brands</h3>
+  <div class="grid">
+    <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Nelson_Mandela_University_logo.svg" alt="NMU Logo"><p>NMU Business School</p></div>
+    <div class="card"><img src="https://1000logos.net/wp-content/uploads/2017/03/Coca-Cola-Logo.png" alt="Coca-Cola Logo"><p>Coca-Cola SA</p></div>
+    <div class="card"><img src="https://coega.co.za/wp-content/uploads/2018/12/Coega-Logo.png" alt="Coega Logo"><p>Coega Development Corp</p></div>
+  </div>
+</section>
+
+<!-- Contact / Social -->
+<section id="contact">
+  <h3 class="text-gold" style="font-size:2.5rem;">Get in Touch</h3>
+  <p class="section-content">
+    Reach out to us through social platforms or email. We are here to guide your entrepreneurial journey.
+  </p>
+  <p>
+    <a href="https://wa.me/2798364680" target="_blank">WhatsApp</a> |
+    <a href="https://www.facebook.com/BizEquip" target="_blank">Facebook</a> |
+    <a href="https://www.instagram.com/BizEquip" target="_blank">Instagram</a> |
+    <a href="https://www.tiktok.com/@BizEquip" target="_blank">TikTok</a>
+  </p>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Biz Equip. All Rights Reserved.</p>
+  <p>Email: info@bizequip.co.za | Phone: 079 836 4680</p>
+</footer>
+
+</body>
+</html>
